@@ -10,7 +10,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication">
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.ActivityCadastroAlunos"
+            android:exported="false" />
+        <activity
+            android:name=".ui.ActivityListaAlunos"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
