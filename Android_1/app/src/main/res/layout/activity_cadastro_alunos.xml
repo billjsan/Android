@@ -34,11 +34,4 @@
         android:inputType="textEmailAddress"
         android:hint="e-mail" />
 
-    <Button
-        android:id="@+id/bt_formulario_aluno_confirmar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Salvar"
-        android:layout_margin="8dp"/>
-
 </LinearLayout>
