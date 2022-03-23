@@ -11,20 +11,15 @@ Fundamentos Android 1
 
 ### Conceitos abordados: 
 
-- Implementar listener para `AdapterView`
-- Utilizar o log do Android
-- Transferir dados entre `Activities`
-- Lidar de maneira adequada com `extra`
-- Implementar comportamentos de edição
-- Salvar e editar na mesma `Activity` de formulário
-- Refatorar código
-- Implementar a feature de remoção em `AdapterViews`
-- Analisar e refatorar códigos que não precisam ser executados mais de uma vez
-- Utilizar a referência do Adapter para manipular os dados do `AdapterView`
-- Implementar menu de contexto
-- Criar menus via arquivo estático
-- Realizar o processo de inflar menu
-- Configurar listener de menu adequadamente
+- Criar layouts personalizados para `ListView`
+- Migrar de ArrayAdapter para adapter personalizado
+- Implementar Adapter personalizado por meio do `BaseAdapter`
+- Necessidade de caixa de diálogo para confirmação
+- Implementação de dialog com `AlertDialog`
+- Utilizar o inspetor de código do Android Studio
+- Como funciona a inspeção do lint
+- Resolver tópicos do Android
+- Suprimir alertas
 
 ### Certificado: 
 

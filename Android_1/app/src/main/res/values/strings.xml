@@ -2,4 +2,13 @@
     <string name="app_name">My Application</string>
     <string name="menu_remover">remove</string>
     <string name="menu_salvar">save</string>
+    <string name="dialog_negative_buttom">cancelar</string>
+    <string name="dialog_positive_buttom">confirmar</string>
+    <string name="dialog_message">Tem certeza que quer excluir?</string>
+    <string name="dialog_title">Excluir Aluno</string>
+    <string name="toast_removed_confirmation">\ foi removido(a)</string>
+    <string name="descricao_botao_add_aluno">botao para adicionar novos alunos</string>
+    <string name="formulario_aluno_nome">nome</string>
+    <string name="formulario_aluno_telefone">telefone</string>
+    <string name="formulario_aluno_email">e-mail</string>
 </resources>

@@ -1,5 +1,6 @@
 package com.curso.myapplication.ui;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -7,7 +8,6 @@ import android.view.ContextMenu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -19,6 +19,7 @@ import com.curso.myapplication.model.Aluno;
 import com.curso.myapplication.model.AlunoDAO;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+
 public class ActivityListaAlunos extends AppCompatActivity {
 
     public static final String TITULO_APP_BAR = "Lista de Alunos";
@@ -28,19 +29,18 @@ public class ActivityListaAlunos extends AppCompatActivity {
     private final boolean isLoggable = true;
     private FloatingActionButton fabNovoAluno;
     private ListView lv_listaDeAlunos;
-    private ArrayAdapter<Aluno> adapter;
     private AlunoDAO dao;
+    private ListaAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (isLoggable) Log.d(TAG, "onCreate");
         setContentView(R.layout.activity_lista_alunos);
         setTitle(TITULO_APP_BAR);
 
-        if (isLoggable) Log.d(TAG, "onCreate");
-
         referenciaElementosDaView();
-        configuraAdapterListaAlunos();
+        configuraAdapter();
         configuraBotaoAdicionarAluno();
         configuraCliqueListaDeAlunos();
     }
@@ -50,18 +50,15 @@ public class ActivityListaAlunos extends AppCompatActivity {
         lv_listaDeAlunos = findViewById(R.id.main_activity_lista_de_alunos);
     }
 
-    private void configuraAdapterListaAlunos() {
+    private void configuraAdapter() {
         dao = new AlunoDAO();
-        adapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_list_item_1);
+        adapter = new ListaAdapter(this);
         lv_listaDeAlunos.setAdapter(adapter);
         registerForContextMenu(lv_listaDeAlunos);
     }
 
     private void configuraBotaoAdicionarAluno() {
-        fabNovoAluno.setOnClickListener(view -> {
-            abreFormularioInserirNovoAluno();
-        });
+        fabNovoAluno.setOnClickListener(view -> abreFormularioInserirNovoAluno());
     }
 
     private void abreFormularioInserirNovoAluno() {
@@ -72,17 +69,14 @@ public class ActivityListaAlunos extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-
         if (isLoggable) Log.d(TAG, "onResume");
-        adapter.clear();
-        adapter.addAll(dao.todosAlunos());
+        adapter.atualiza(dao.todosAlunos());
     }
 
     private void configuraCliqueListaDeAlunos() {
         lv_listaDeAlunos.setOnItemClickListener((adapterView,
                                                  view, position, id) -> {
             if (isLoggable) Log.d(TAG, "onItemClick");
-
             Aluno alunoSelecionado = dao.todosAlunos().get(position);
             Intent i = new Intent(ActivityListaAlunos.this,
                     ActivityCadastroAlunos.class);
@@ -103,16 +97,35 @@ public class ActivityListaAlunos extends AppCompatActivity {
         if (isLoggable) Log.d(TAG, "onLongPress");
         int itemId = item.getItemId();
 
+        //delete menu
         if (itemId == R.id.activity_context_menu) {
-            AdapterView.AdapterContextMenuInfo menuInfo =
-                    (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
-            Aluno alunoEscolhido = adapter.getItem(menuInfo.position);
-            dao.deleta(alunoEscolhido);
-            adapter.remove(alunoEscolhido);
-
-            Toast.makeText(this, alunoEscolhido.toString()
-                    + " foi removido(a)", Toast.LENGTH_SHORT).show();
+            if (isLoggable) Log.d(TAG, "onDeletePress");
+            deleteConfirmationDialog(item);
         }
         return super.onContextItemSelected(item);
+    }
+
+    private void deleteConfirmationDialog(@NonNull MenuItem item) {
+        new AlertDialog
+                .Builder(this)
+                .setTitle(R.string.dialog_title)
+                .setMessage(R.string.dialog_message)
+                .setPositiveButton(R.string.dialog_positive_buttom,
+                        (dialogInterface, i) -> excuiAluno(item))
+                .setNegativeButton(R.string.dialog_negative_buttom,
+                        null)
+                .show();
+    }
+
+    private void excuiAluno(@NonNull MenuItem item) {
+        AdapterView.AdapterContextMenuInfo menuInfo =
+                (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        Aluno alunoEscolhido = adapter.getItem(menuInfo.position);
+        dao.deleta(alunoEscolhido);
+        adapter.remove(alunoEscolhido);
+
+        Toast.makeText(this, alunoEscolhido.toString()
+                + getString(R.string.toast_removed_confirmation),
+                Toast.LENGTH_SHORT).show();
     }
 }

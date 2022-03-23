@@ -3,6 +3,8 @@ package com.curso.myapplication.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.annotation.NonNull;
+
 public class Aluno implements Parcelable {
 
     private String nome, telefone, email;
@@ -53,6 +55,7 @@ public class Aluno implements Parcelable {
         return email;
     }
 
+    @NonNull
     @Override
     public String toString() {
         return nome;
@@ -65,10 +68,9 @@ public class Aluno implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel parcel, int i) {
-
         parcel.writeString(nome);
-        parcel.writeString(email);
         parcel.writeString(telefone);
+        parcel.writeString(email);
         parcel.writeInt(id);
     }
 

@@ -14,7 +14,8 @@
         android:layout_margin="8dp"
         android:ems="10"
         android:inputType="textCapWords"
-        android:hint="nome" />
+        android:hint="@string/formulario_aluno_nome"
+        android:autofillHints="name" />
 
     <EditText
         android:id="@+id/et_formulario_aluno_telefone"
@@ -23,7 +24,8 @@
         android:layout_margin="8dp"
         android:ems="10"
         android:inputType="phone"
-        android:hint="telefone" />
+        android:hint="@string/formulario_aluno_telefone"
+        android:autofillHints="phone" />
 
     <EditText
         android:id="@+id/et_formulario_aluno_email"
@@ -32,6 +34,7 @@
         android:layout_margin="8dp"
         android:ems="10"
         android:inputType="textEmailAddress"
-        android:hint="e-mail" />
+        android:hint="@string/formulario_aluno_email"
+        android:autofillHints="emailAddress" />
 
 </LinearLayout>

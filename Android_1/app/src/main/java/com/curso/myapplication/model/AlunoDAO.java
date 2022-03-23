@@ -2,7 +2,6 @@ package com.curso.myapplication.model;
 
 import android.util.Log;
 
-import com.curso.myapplication.ui.ActivityListaAlunos;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +14,7 @@ public class AlunoDAO {
     private static int idDoAluno = 1;
 
     public void salva(Aluno aluno) {
+        if (isLoggable) Log.d(TAG, "onSalva");
         aluno.setId(idDoAluno);
         alunos.add(aluno);
         idDoAluno++;
@@ -25,9 +25,10 @@ public class AlunoDAO {
      * caso o aluno exista na lista de alunos e nao seja nulo
      * ele sera substituido pelo aluno recebido
      *
-     * @param aluno
+     *
      */
     public void edita(Aluno aluno) {
+        if (isLoggable) Log.d(TAG, "onEdita");
         Aluno alunoEncontrado = null;
 
         for (Aluno alunoNaListaDeAlunos : alunos) {
