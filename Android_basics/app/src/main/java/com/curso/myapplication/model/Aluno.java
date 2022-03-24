@@ -4,18 +4,29 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
+import androidx.room.Entity;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
 
+@Entity(tableName = "aluno")
 public class Aluno implements Parcelable {
 
-    private String nome, telefone, email;
+    @PrimaryKey(autoGenerate = true)
     private int id = 0;
+    private String nome, telefone, email;
 
+    public Aluno() {
+
+    }
+
+    @Ignore
     public Aluno(String nome, String telefone, String email) {
         this.nome = nome;
         this.telefone = telefone;
         this.email = email;
     }
 
+    @Ignore
     private Aluno(Parcel parcel) {
         nome = parcel.readString();
         telefone = parcel.readString();

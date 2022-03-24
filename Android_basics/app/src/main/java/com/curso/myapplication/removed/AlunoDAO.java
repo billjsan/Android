@@ -1,7 +1,8 @@
-package com.curso.myapplication.model;
+package com.curso.myapplication.removed;
 
 import android.util.Log;
 
+import com.curso.myapplication.model.Aluno;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,8 +25,6 @@ public class AlunoDAO {
      * recebe um aluno via parametro para edicao
      * caso o aluno exista na lista de alunos e nao seja nulo
      * ele sera substituido pelo aluno recebido
-     *
-     *
      */
     public void edita(Aluno aluno) {
         if (isLoggable) Log.d(TAG, "onEdita");

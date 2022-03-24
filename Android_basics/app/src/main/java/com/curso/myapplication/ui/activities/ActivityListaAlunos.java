@@ -1,4 +1,4 @@
-package com.curso.myapplication.ui;
+package com.curso.myapplication.ui.activities;
 
 import android.app.AlertDialog;
 import android.content.Intent;
@@ -15,8 +15,10 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.curso.myapplication.R;
+import com.curso.myapplication.database.AppDatabase;
+import com.curso.myapplication.database.dao.RoomAlunoDAO;
 import com.curso.myapplication.model.Aluno;
-import com.curso.myapplication.model.AlunoDAO;
+import com.curso.myapplication.ui.adapter.ListaAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 
@@ -29,8 +31,8 @@ public class ActivityListaAlunos extends AppCompatActivity {
     private final boolean isLoggable = true;
     private FloatingActionButton fabNovoAluno;
     private ListView lv_listaDeAlunos;
-    private AlunoDAO dao;
     private ListaAdapter adapter;
+    private RoomAlunoDAO dao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +53,9 @@ public class ActivityListaAlunos extends AppCompatActivity {
     }
 
     private void configuraAdapter() {
-        dao = new AlunoDAO();
+        dao = AppDatabase.getDataBaseInstance(this)
+                .getDAOInstance();
+
         adapter = new ListaAdapter(this);
         lv_listaDeAlunos.setAdapter(adapter);
         registerForContextMenu(lv_listaDeAlunos);
@@ -125,7 +129,7 @@ public class ActivityListaAlunos extends AppCompatActivity {
         adapter.remove(alunoEscolhido);
 
         Toast.makeText(this, alunoEscolhido.toString()
-                + getString(R.string.toast_removed_confirmation),
+                        + getString(R.string.toast_removed_confirmation),
                 Toast.LENGTH_SHORT).show();
     }
 }

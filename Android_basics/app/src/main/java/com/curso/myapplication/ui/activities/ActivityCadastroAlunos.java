@@ -1,4 +1,4 @@
-package com.curso.myapplication.ui;
+package com.curso.myapplication.ui.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,14 +11,15 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.curso.myapplication.R;
+import com.curso.myapplication.database.AppDatabase;
+import com.curso.myapplication.database.dao.RoomAlunoDAO;
 import com.curso.myapplication.model.Aluno;
-import com.curso.myapplication.model.AlunoDAO;
 
 public class ActivityCadastroAlunos extends AppCompatActivity {
 
     private final String TAG = ActivityCadastroAlunos.class.getSimpleName();
     private final boolean isLoggable = true;
-    private final AlunoDAO dao = new AlunoDAO();
+    private RoomAlunoDAO dao;
     private Aluno alunoSelecionado = null;
     private EditText et_campoNome;
     private EditText et_campoEmail;
@@ -28,6 +29,9 @@ public class ActivityCadastroAlunos extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         setContentView(R.layout.activity_cadastro_alunos);
         if (isLoggable) Log.d(TAG, "onCreate");
+
+        dao = AppDatabase.getDataBaseInstance(this)
+                .getDAOInstance();
 
         referenciaElementosDaView();
         recuperaInfoAlunoSelecionado();

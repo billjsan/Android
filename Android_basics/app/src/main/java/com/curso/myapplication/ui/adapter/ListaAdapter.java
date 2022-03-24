@@ -1,4 +1,4 @@
-package com.curso.myapplication.ui;
+package com.curso.myapplication.ui.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
