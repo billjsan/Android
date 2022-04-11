@@ -8,12 +8,15 @@ import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
+import java.util.Calendar;
+
 @Entity(tableName = "aluno")
 public class Aluno implements Parcelable {
 
     @PrimaryKey(autoGenerate = true)
     private int id = 0;
     private String nome,sobrenome,  telefone, email;
+    private Calendar dataCriacao = Calendar.getInstance();;
 
     public Aluno() {
 
@@ -25,6 +28,7 @@ public class Aluno implements Parcelable {
         this.sobrenome = sobrenome;
         this.telefone = telefone;
         this.email = email;
+        this.dataCriacao = Calendar.getInstance();
     }
 
     @Ignore
@@ -34,6 +38,7 @@ public class Aluno implements Parcelable {
         telefone = parcel.readString();
         email = parcel.readString();
         id = parcel.readInt();
+        dataCriacao.setTimeInMillis(parcel.readLong());
     }
 
     public void setNome(String nome) {
@@ -76,6 +81,14 @@ public class Aluno implements Parcelable {
         return sobrenome;
     }
 
+    public Calendar getDataCriacao() {
+        return dataCriacao;
+    }
+
+    public void setDataCriacao(Calendar dataCriacao) {
+        this.dataCriacao = dataCriacao;
+    }
+
     @NonNull
     @Override
     public String toString() {
@@ -94,6 +107,7 @@ public class Aluno implements Parcelable {
         parcel.writeString(telefone);
         parcel.writeString(email);
         parcel.writeInt(id);
+        parcel.writeLong(dataCriacao.getTimeInMillis());
     }
 
     public static final Parcelable.Creator<Aluno> CREATOR =
