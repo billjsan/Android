@@ -40,7 +40,6 @@ public class ActivityListaAlunos extends AppCompatActivity {
         if (isLoggable) Log.d(TAG, "onCreate");
         setContentView(R.layout.activity_lista_alunos);
         setTitle(TITULO_APP_BAR);
-
         referenciaElementosDaView();
         configuraAdapter();
         configuraBotaoAdicionarAluno();

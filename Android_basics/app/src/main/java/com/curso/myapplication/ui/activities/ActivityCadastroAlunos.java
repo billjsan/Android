@@ -22,6 +22,7 @@ public class ActivityCadastroAlunos extends AppCompatActivity {
     private RoomAlunoDAO dao;
     private Aluno alunoSelecionado = null;
     private EditText et_campoNome;
+    private EditText et_campoSobrenome;
     private EditText et_campoEmail;
     private EditText et_campoTelefone;
 
@@ -40,6 +41,7 @@ public class ActivityCadastroAlunos extends AppCompatActivity {
 
     private void referenciaElementosDaView() {
         et_campoNome = findViewById(R.id.formulario_aluno_nome);
+        et_campoSobrenome = findViewById(R.id.formulario_aluno_sobrenome);
         et_campoEmail = findViewById(R.id.et_formulario_aluno_email);
         et_campoTelefone = findViewById(R.id.et_formulario_aluno_telefone);
     }
@@ -57,14 +59,16 @@ public class ActivityCadastroAlunos extends AppCompatActivity {
 
     private void mostraInfoAlunoSelecionado(@NonNull Aluno alunoSelecionado) {
         et_campoNome.setText(alunoSelecionado.getNome());
+        et_campoSobrenome.setText(alunoSelecionado.getSobrenome());
         et_campoEmail.setText(alunoSelecionado.getEmail());
         et_campoTelefone.setText(alunoSelecionado.getTelefone());
     }
 
     private void editaAlunoExistente() {
         if (isLoggable) Log.d(TAG, "onEditaAlunoExistente");
-        alunoSelecionado.setEmail(et_campoEmail.getText().toString());
         alunoSelecionado.setNome(et_campoNome.getText().toString());
+        alunoSelecionado.setSobrenome(et_campoSobrenome.getText().toString());
+        alunoSelecionado.setEmail(et_campoEmail.getText().toString());
         alunoSelecionado.setTelefone(et_campoTelefone.getText().toString());
         dao.edita(alunoSelecionado);
     }
@@ -73,6 +77,7 @@ public class ActivityCadastroAlunos extends AppCompatActivity {
         if (isLoggable) Log.d(TAG, "onCriaNovoAluno");
         Aluno novoAluno = new Aluno(
                 et_campoNome.getText().toString(),
+                et_campoSobrenome.getText().toString(),
                 et_campoTelefone.getText().toString(),
                 et_campoEmail.getText().toString()
         );

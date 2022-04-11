@@ -18,6 +18,16 @@
         android:autofillHints="name" />
 
     <EditText
+        android:id="@+id/formulario_aluno_sobrenome"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:ems="10"
+        android:inputType="textCapWords"
+        android:hint="@string/formulario_aluno_sobrenome"
+        android:autofillHints="name" />
+
+    <EditText
         android:id="@+id/et_formulario_aluno_telefone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

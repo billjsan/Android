@@ -58,9 +58,13 @@ public class ListaAdapter extends BaseAdapter {
     }
 
     private void binding(int position, View viewCriada) {
-        TextView nome = viewCriada.findViewById(R.id.tv_nome_aluno);
+        TextView nomeESobrenome = viewCriada.findViewById(R.id.tv_nome_aluno);
         TextView telefone = viewCriada.findViewById(R.id.tv_telefone_aluno);
-        nome.setText(todosOsAlunos.get(position).getNome());
+
+        String nomeSobrenome = todosOsAlunos.get(position).getNome() + " " +
+                todosOsAlunos.get(position).getSobrenome();
+
+        nomeESobrenome.setText(nomeSobrenome);
         telefone.setText(todosOsAlunos.get(position).getTelefone());
     }
 

@@ -6,12 +6,10 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 
 class AppMigrations {
 
-    protected static final Migration MIGRATIONS = new Migration(1, 2) {
+    protected static final Migration MIGRATIONS_1_2 = new Migration(1, 2) {
         @Override
         public void migrate(@NonNull SupportSQLiteDatabase database) {
-
-            database.execSQL("ALTER TABLE "+ AppDatabase.DATABASE_NAME +
-                    " ADD COLUMN sobrenome TEXT");
+            database.execSQL("ALTER TABLE aluno ADD COLUMN sobrenome TEXT");
         }
     };
 

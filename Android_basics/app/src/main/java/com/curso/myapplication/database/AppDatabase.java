@@ -1,7 +1,5 @@
 package com.curso.myapplication.database;
 
-import static com.curso.myapplication.database.AppMigrations.MIGRATIONS;
-
 import android.content.Context;
 
 import androidx.room.Database;
@@ -11,7 +9,7 @@ import androidx.room.RoomDatabase;
 import com.curso.myapplication.database.dao.RoomAlunoDAO;
 import com.curso.myapplication.model.Aluno;
 
-@Database(entities = {Aluno.class}, version = 1, exportSchema = false)
+@Database(entities = {Aluno.class}, version = 2, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
 
     public static final String DATABASE_NAME = "meuApp.db";
@@ -24,7 +22,7 @@ public abstract class AppDatabase extends RoomDatabase {
         if (dbInstance == null) {
             dbInstance = Room.databaseBuilder(context, AppDatabase.class, DATABASE_NAME)
                     .allowMainThreadQueries()
-                    .addMigrations(MIGRATIONS)
+                    .addMigrations(AppMigrations.MIGRATIONS_1_2)
                     .build();
         }
         return dbInstance;
